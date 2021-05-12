@@ -36,20 +36,24 @@
     <div class="form q-mb-lg">
       <div class="row q-mb-md">
         <label>Nom:</label>
-        <input type="text"
-               v-model="name"
-               v-autofocus
-               :class="{'error': !nameIsValid}">
+        <label>
+          <input type="text"
+                 v-model="name"
+                 v-autofocus
+                 :class="{'error': !nameIsValid}">
+        </label>
         <label v-show="!nameIsValid"
                class="error">Maximum 15 caractères
         </label>
       </div>
       <div class="row q-mb-md">
         <label>Age:</label>
-        <input type="number"
-               v-model="age"
-               v-autofocus
-               :class="{'error': !ageIsValid}">
+        <label>
+          <input type="number"
+                 v-model="age"
+                 v-autofocus
+                 :class="{'error': !ageIsValid}">
+        </label>
         <label v-show="!ageIsValid"
                class="error">Veuillez entrer un âge compris entre 1 et 100
         </label>
@@ -90,15 +94,15 @@ export default {
     }
   },
   computed: {
+    futureAge () {
+      return parseInt(this.age) + 10
+    },
     nameIsValid () {
       return this.name.length > 0 && this.name.length <= 15
     },
     ageIsValid () {
       return this.age && this.age > 0 && this.age < 101
     }
-  },
-  futureAge () {
-    return parseInt(this.age) + 10
   },
   filters: {
     uppercase: function (value) {
@@ -111,16 +115,17 @@ export default {
       this.age = Math.floor(Math.random() * 100)
     }
   },
-  mounted () {
-    this.randomPerson()
-  },
   directives: {
     autofocus: {
       inserted (el) {
         el.focus()
       }
     }
+  },
+  mounted () {
+    this.randomPerson()
   }
+
 }
 </script>
 
